@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package gameapp;
-
 /**
  *
  * @author bluebackdev
@@ -17,19 +16,29 @@ public class Suit {
     private static GameType gameType;
     
     private static int cardsInSuit;
+    private static int cardsInHand;
+    
+    private static String suitCoins = "\u2446";
+    private static String suitFlasks = "\u2447";
+    private static String suitSabres = "\u2448";
+    private static String suitStaves = "\u2449";
+    private static String suitFaceCards = "\u244a";
     
     public static void setGameType(GameType gt) {
         gameType = gt;
         
-        switch(gt) {
+        switch(gameType) {
             case SUITS:
                 cardsInSuit = 4;
+                cardsInHand = 3;
                 break;
             case SABACC:
                 cardsInSuit = 76;
+                cardsInHand = 2;
                 break;
             default:
                 cardsInSuit = -1;
+                cardsInHand = -1;
                 break;
         }
     }
@@ -38,15 +47,23 @@ public class Suit {
         return cardsInSuit;
     }
     
-    public static String getCardValue(int input) {
+    public static int getCardsInHand() {
+        return cardsInHand;
+    }
+    
+    public static GameType getGameType() {
+        return gameType;
+    }
+    
+    public static String getCardString(int input) {
         String value;
         
         switch(gameType) {
             case SUITS:
-                value = getSuitsValue(input);
+                value = getSuitsString(input);
                 break;
             case SABACC:
-                value = getSabaccValue(input);
+                value = getSabaccString(input);
                 break;
             default:
                 value = "NULL";
@@ -55,8 +72,12 @@ public class Suit {
         
         return value;
     }
+    
+    public static int getCardValue(int input) {
+        return getSabaccValue(input);
+    }
 
-    private static String getSuitsValue(int input) {
+    private static String getSuitsString(int input) {
         String value;
         
         switch(input) {
@@ -81,241 +102,482 @@ public class Suit {
         return value;
     }
 
-    private static String getSabaccValue(int input) {
+    private static String getSabaccString(int input) {
         
         String value;
         
         switch(input) {
             case 0:
-                value = "\u2663";
+                value = "The Idiot " + suitFaceCards;
                 break;
             case 1:
-                value = "\u2666";
+                value = "The Star " + suitFaceCards;
                 break;
             case 2:
-                value = "\u2665";
+                value = "The Evil One " + suitFaceCards;
                 break;
             case 3:
-                value = "\u2660";
+                value = "Moderation " + suitFaceCards;
                 break;
             case 4:
-                value = "\u2663";
+                value = "Demise " + suitFaceCards;
                 break;
             case 5:
-                value = "\u2666";
+                value = "Balance " + suitFaceCards;
                 break;
             case 6:
-                value = "\u2665";
+                value = "Endurance " + suitFaceCards;
                 break;
             case 7:
-                value = "\u2660";
+                value = "Queen of A&D " + suitFaceCards;
                 break;
             case 8:
-                value = "\u2663";
+                value = "1 " + suitCoins;
                 break;
             case 9:
-                value = "\u2666";
+                value = "2 " + suitCoins;
                 break;
             case 10:
-                value = "\u2665";
+                value = "3 " + suitCoins;
                 break;
             case 11:
-                value = "\u2660";
+                value = "4 " + suitCoins;
                 break;
             case 12:
-                value = "\u2663";
+                value = "5 " + suitCoins;
                 break;
             case 13:
-                value = "\u2666";
+                value = "6 " + suitCoins;
                 break;
             case 14:
-                value = "\u2665";
+                value = "7 " + suitCoins;
                 break;
             case 15:
-                value = "\u2660";
+                value = "8 " + suitCoins;
                 break;
             case 16:
-                value = "\u2663";
+                value = "9 " + suitCoins;
                 break;
             case 17:
-                value = "\u2666";
+                value = "10 " + suitCoins;
                 break;
             case 18:
-                value = "\u2665";
+                value = "11 " + suitCoins;
                 break;
             case 19:
-                value = "\u2660";
+                value = "C " + suitCoins;
                 break;
             case 20:
-                value = "\u2663";
+                value = "MS " + suitCoins;
                 break;
             case 21:
-                value = "\u2666";
+                value = "MR " + suitCoins;
                 break;
             case 22:
-                value = "\u2665";
+                value = "A " + suitCoins;
                 break;
             case 23:
-                value = "\u2660";
+                value = "1 " + suitFlasks;
                 break;
             case 24:
-                value = "\u2663";
+                value = "2 " + suitFlasks;
                 break;
             case 25:
-                value = "\u2666";
+                value = "3 " + suitFlasks;
                 break;
             case 26:
-                value = "\u2665";
+                value = "4 " + suitFlasks;
                 break;
             case 27:
-                value = "\u2660";
+                value = "5 " + suitFlasks;
                 break;
             case 28:
-                value = "\u2663";
+                value = "6 " + suitFlasks;
                 break;
             case 29:
-                value = "\u2666";
+                value = "7 " + suitFlasks;
                 break;
             case 30:
-                value = "\u2665";
+                value = "8 " + suitFlasks;
                 break;
             case 31:
-                value = "\u2660";
+                value = "9 " + suitFlasks;
                 break;
             case 32:
-                value = "\u2663";
+                value = "10 " + suitFlasks;
                 break;
             case 33:
-                value = "\u2666";
+                value = "11 " + suitFlasks;
                 break;
             case 34:
-                value = "\u2665";
+                value = "C " + suitFlasks;
                 break;
             case 35:
-                value = "\u2660";
+                value = "MS " + suitFlasks;
                 break;
             case 36:
-                value = "\u2663";
+                value = "MR " + suitFlasks;
                 break;
             case 37:
-                value = "\u2666";
+                value = "A " + suitFlasks;
                 break;
             case 38:
-                value = "\u2665";
+                value = "1 " + suitSabres;
                 break;
             case 39:
-                value = "\u2660";
+                value = "2 " + suitSabres;
                 break;
             case 40:
-                value = "\u2663";
+                value = "3 " + suitSabres;
                 break;
             case 41:
-                value = "\u2666";
+                value = "4 " + suitSabres;
                 break;
             case 42:
-                value = "\u2665";
+                value = "5 " + suitSabres;
                 break;
             case 43:
-                value = "\u2660";
+                value = "6 " + suitSabres;
                 break;
             case 44:
-                value = "\u2663";
+                value = "7 " + suitSabres;
                 break;
             case 45:
-                value = "\u2666";
+                value = "8 " + suitSabres;
                 break;
             case 46:
-                value = "\u2665";
+                value = "9 " + suitSabres;
                 break;
             case 47:
-                value = "\u2660";
+                value = "10 " + suitSabres;
                 break;
             case 48:
-                value = "\u2663";
+                value = "11 " + suitSabres;
                 break;
             case 49:
-                value = "\u2666";
+                value = "C " + suitSabres;
                 break;
             case 50:
-                value = "\u2665";
+                value = "MS " + suitSabres;
                 break;
             case 51:
-                value = "\u2660";
+                value = "MR " + suitSabres;
                 break;
             case 52:
-                value = "\u2663";
+                value = "A " + suitSabres;
                 break;
             case 53:
-                value = "\u2666";
+                value = "1 " + suitStaves;
                 break;
             case 54:
-                value = "\u2665";
+                value = "2 " + suitStaves;
                 break;
             case 55:
-                value = "\u2660";
+                value = "3 " + suitStaves;
                 break;
             case 56:
-                value = "\u2663";
+                value = "4 " + suitStaves;
                 break;
             case 57:
-                value = "\u2666";
+                value = "5 " + suitStaves;
                 break;
             case 58:
-                value = "\u2665";
+                value = "6 " + suitStaves;
                 break;
             case 59:
-                value = "\u2660";
+                value = "7 " + suitStaves;
                 break;
             case 60:
-                value = "\u2663";
+                value = "8 " + suitStaves;
                 break;
             case 61:
-                value = "\u2666";
+                value = "9 " + suitStaves;
                 break;
             case 62:
-                value = "\u2665";
+                value = "10 " + suitStaves;
                 break;
             case 63:
-                value = "\u2660";
+                value = "11 " + suitStaves;
                 break;
             case 64:
-                value = "\u2665";
+                value = "C " + suitStaves;
                 break;
             case 65:
-                value = "\u2660";
+                value = "MS " + suitStaves;
                 break;
             case 66:
-                value = "\u2663";
+                value = "MR " + suitStaves;
                 break;
             case 67:
-                value = "\u2666";
+                value = "A " + suitStaves;
                 break;
             case 68:
-                value = "\u2665";
+                value = "Queen of A&D " + suitFaceCards;
                 break;
             case 69:
-                value = "\u2660";
+                value = "Endurance " + suitFaceCards;
                 break;
             case 70:
-                value = "\u2663";
+                value = "Balance " + suitFaceCards;
                 break;
             case 71:
-                value = "\u2666";
+                value = "Demise " + suitFaceCards;
                 break;
             case 72:
-                value = "\u2665";
+                value = "Moderation " + suitFaceCards;
                 break;
             case 73:
-                value = "\u2660";
+                value = "The Evil One " + suitFaceCards;
                 break;
             case 74:
-                value = "\u2663";
+                value = "The Star " + suitFaceCards;
                 break;
             case 75:
-                value = "\u2666";
+                value = "The Idiot " + suitFaceCards;
                 break;
             default:
                 value = "NULL";
+                break;
+        }
+        
+        return value;
+    }
+    
+    private static int getSabaccValue(int input) {
+        
+        int value;
+        
+        switch(input) {
+            case 0:
+                value = 0;
+                break;
+            case 1:
+                value = -17;
+                break;
+            case 2:
+                value = -15;
+                break;
+            case 3:
+                value = -14;
+                break;
+            case 4:
+                value = -13;
+                break;
+            case 5:
+                value = -11;
+                break;
+            case 6:
+                value = -8;
+                break;
+            case 7:
+                value = -2;
+                break;
+            case 8:
+                value = 1;
+                break;
+            case 9:
+                value = 2;
+                break;
+            case 10:
+                value = 3;
+                break;
+            case 11:
+                value = 4;
+                break;
+            case 12:
+                value = 5;
+                break;
+            case 13:
+                value = 6;
+                break;
+            case 14:
+                value = 7;
+                break;
+            case 15:
+                value = 8;
+                break;
+            case 16:
+                value = 9;
+                break;
+            case 17:
+                value = 10;
+                break;
+            case 18:
+                value = 11;
+                break;
+            case 19:
+                value = 12;
+                break;
+            case 20:
+                value = 13;
+                break;
+            case 21:
+                value = 14;
+                break;
+            case 22:
+                value = 15;
+                break;
+            case 23:
+                value = 1;
+                break;
+            case 24:
+                value = 2;
+                break;
+            case 25:
+                value = 3;
+                break;
+            case 26:
+                value = 4;
+                break;
+            case 27:
+                value = 5;
+                break;
+            case 28:
+                value = 6;
+                break;
+            case 29:
+                value = 7;
+                break;
+            case 30:
+                value = 8;
+                break;
+            case 31:
+                value = 9;
+                break;
+            case 32:
+                value = 10;
+                break;
+            case 33:
+                value = 11;
+                break;
+            case 34:
+                value = 12;
+                break;
+            case 35:
+                value = 13;
+                break;
+            case 36:
+                value = 14;
+                break;
+            case 37:
+                value = 15;
+                break;
+            case 38:
+                value = 1;
+                break;
+            case 39:
+                value = 2;
+                break;
+            case 40:
+                value = 3;
+                break;
+            case 41:
+                value = 4;
+                break;
+            case 42:
+                value = 5;
+                break;
+            case 43:
+                value = 6;
+                break;
+            case 44:
+                value = 7;
+                break;
+            case 45:
+                value = 8;
+                break;
+            case 46:
+                value = 9;
+                break;
+            case 47:
+                value = 10;
+                break;
+            case 48:
+                value = 11;
+                break;
+            case 49:
+                value = 12;
+                break;
+            case 50:
+                value = 13;
+                break;
+            case 51:
+                value = 14;
+                break;
+            case 52:
+                value = 15;
+                break;
+            case 53:
+                value = 1;
+                break;
+            case 54:
+                value = 2;
+                break;
+            case 55:
+                value = 3;
+                break;
+            case 56:
+                value = 4;
+                break;
+            case 57:
+                value = 5;
+                break;
+            case 58:
+                value = 6;
+                break;
+            case 59:
+                value = 7;
+                break;
+            case 60:
+                value = 8;
+                break;
+            case 61:
+                value = 9;
+                break;
+            case 62:
+                value = 10;
+                break;
+            case 63:
+                value = 11;
+                break;
+            case 64:
+                value = 12;
+                break;
+            case 65:
+                value = 13;
+                break;
+            case 66:
+                value = 14;
+                break;
+            case 67:
+                value = 15;
+                break;
+            case 68:
+                value = -2;
+                break;
+            case 69:
+                value = -8;
+                break;
+            case 70:
+                value = -11;
+                break;
+            case 71:
+                value = -13;
+                break;
+            case 72:
+                value = -14;
+                break;
+            case 73:
+                value = -15;
+                break;
+            case 74:
+                value = -17;
+                break;
+            case 75:
+                value = 0;
+                break;
+            default:
+                value = -113;
                 break;
         }
         

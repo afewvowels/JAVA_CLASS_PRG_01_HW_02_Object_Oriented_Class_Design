@@ -13,20 +13,35 @@ public class Card {
 //    private String cardValue;
     private int cardIndex = -1;
     
+    public Card(int input) {
+        cardIndex = input;
+    }
+    
     public void setCardIndex(int input) {
         cardIndex = input;
     }
     
-    public String getCardValue(int input) {
+    public String getCardString() {
+        return Suit.getCardString(cardIndex);
+    }
+    
+    public int getCardValue() {
         return Suit.getCardValue(cardIndex);
     }
     
+    public int getCardIndex() {
+        return this.cardIndex;
+    }
+    
     public void incrementCardSuits() {
-        if (cardIndex < Suit.getCardsInSuit()) {
-            cardIndex++;
-        }
-        else {
+        cardIndex++;
+        
+        if(cardIndex == Suit.getCardsInSuit()) {
             cardIndex = 0;
         }
+    }
+    
+    public void replaceCard(int index) {
+        
     }
 }
