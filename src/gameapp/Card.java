@@ -42,6 +42,6 @@ public class Card {
     }
     
     public void replaceCard(int index) {
-        
+        this.cardIndex = index;
     }
 }

@@ -61,7 +61,7 @@ public class GameApp {
             selection = keyboard.nextInt();
             
             hand.replaceCard(selection - 1);
-            hand.randomizeHand();
+            hand.randomizeHandSuits();
             
         } while (!hand.validateHand());
         
@@ -74,6 +74,7 @@ public class GameApp {
     
     private static void sabaccGame() {
         int handValue;
+        int round = 1;
         
         Hand playerHand = new Hand();
         Hand dealerHand = new Hand();
@@ -105,15 +106,31 @@ public class GameApp {
                     + playerHand.getHandSize() + "): ");
             selection = keyboard.nextInt();
 
-            playerHand.replaceCard(selection - 1);
-            playerHand.randomizeHand();
+            playerHand.replaceCardSabacc(selection - 1);
+            playerHand.randomizeHandSabacc();
 
-        } while (!playerHand.validateHand());
+            round++;
+        } while (round < 6);
 
-        System.out.println("\nWinning hand:");
-        for (int i = 0 ; i < Suit.getCardsInHand() ; i++) {
-            System.out.print(playerHand.getCardStringAtIndex(i) + "\t");
+        if (playerHand.getHandValue() >= -23 && playerHand.getHandValue() <= 23) {
+            System.out.println("\nWinning hand:");
+            for (int i = 0 ; i < Suit.getCardsInHand() ; i++) {
+                System.out.print(playerHand.getCardStringAtIndex(i) + "\t");
+            }
+                        
+            System.out.print("\nThis is the value of your hand: ");
+            for (int i = 0 ; i < playerHand.getHandSize() ; i++) {
+                System.out.print(playerHand.getCardValueAtIndex(i));
+                if (i != Suit.getCardsInHand() - 1) {
+                    System.out.print(" + ");
+                }
+            }
+            System.out.print(" = " + playerHand.getHandValue());
         }
+        else {
+            System.out.println("\nYou bombed out!");
+        }
+        
         System.out.println("\nGAME OVER");
     }
 }

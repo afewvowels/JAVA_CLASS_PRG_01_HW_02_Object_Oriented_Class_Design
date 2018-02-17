@@ -69,11 +69,29 @@ public class Hand {
         });
     }
     
-    public void randomizeHand() {
+    public void randomizeHandSuits() {
         for (int i = 0 ; i < Suit.getCardsInHand() ; i++) {
             if (this.rand.nextInt(5) == 0) {
                 this.cards[i].incrementCardSuits();
             }
+        }
+    }
+    
+    public void randomizeHandSabacc() {
+        for (int i = 0 ; i < this.cards.length ; i++) {
+//            for (int j = 0 ; j < i ; j++) {
+//                do { 
+//                    if (this.rand.nextInt(5) == 0) {
+//                        this.cards[i].replaceCard(this.rand.nextInt(Suit.getCardsInSuit()));
+//                    }
+//                } while (!validateHandSabacc());
+//            }
+//            
+            do { 
+                if (this.rand.nextInt(5) == 0) {
+                    this.cards[i].replaceCard(this.rand.nextInt(Suit.getCardsInSuit()));
+                }
+            } while (!validateHandSabacc());
         }
     }
     
@@ -119,6 +137,4 @@ public class Hand {
         
         return true;
     }
-    
-    
 }
