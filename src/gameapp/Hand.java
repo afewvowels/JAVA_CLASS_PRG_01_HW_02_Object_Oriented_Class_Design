@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 /**
- *
+ * Class used to hold cards array.
  * @author bluebackdev
  */
 public class Hand {

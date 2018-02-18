@@ -5,7 +5,8 @@
  */
 package gameapp;
 /**
- *
+ * Static class that is used to store game type information and returns
+ * strings and integer values to other game objects.
  * @author bluebackdev
  */
 public class Suit {
