@@ -9,21 +9,35 @@ package gameapp;
  * @author bluebackdev
  */
 public class Suit {
+    // Used to regulate numerous switch statements based on selected gametype
     public enum GameType {
         SUITS, SABACC
     }
     
+    // Defines gametype, set at game beginning
     private static GameType gameType;
     
+    // Defines # of cards in suit and # of cards in starting hand.
+    // Useful for randomly selecting a new card: 
+    //    rand.nextInt(Suit.cardsInSuit);
+    // Useful for creating new hand objects:
+    //    Card[] cards = new Cards[Suit.cardsInHand];
     private static int cardsInSuit;
     private static int cardsInHand;
     
+    // Useful for changing symbols associated with Sabacc suits.
+    // Better than hardcoding in switch statements.
     private static String suitCoins = "\u2446";
     private static String suitFlasks = "\u2447";
     private static String suitSabres = "\u2448";
     private static String suitStaves = "\u2449";
     private static String suitFaceCards = "\u244a";
     
+    /**
+     * Used to set game type variable and initialize variables cardsInSuit
+     * and cardsInHand.
+     * @param gt Input game type.
+     */
     public static void setGameType(GameType gt) {
         gameType = gt;
         
@@ -43,18 +57,38 @@ public class Suit {
         }
     }
     
+    /**
+     * Returns number of cards in suit based on game type.
+     * @return Number of cards in the game types suit.
+     */
     public static int getCardsInSuit() {
         return cardsInSuit;
     }
     
+    /**
+     * Returns the number of starting cards in a hand based on game type.
+     * @return Number of cards in a new hand based on game type.
+     */
     public static int getCardsInHand() {
         return cardsInHand;
     }
     
+    /**
+     * Returns game type.
+     * @return Game type.
+     */
     public static GameType getGameType() {
         return gameType;
     }
     
+    /**
+     * Public method that returns a string literal based on an input integer,
+     * usually the cardIndex of a card object. Uses private methods that
+     * contain game-specific switch statements that return values based
+     * on that input integer.
+     * @param input Index to lookup with private, game-specific switch statement
+     * @return A string representation of the cardIndex value.
+     */
     public static String getCardString(int input) {
         String value;
         
@@ -73,10 +107,24 @@ public class Suit {
         return value;
     }
     
+    /**
+     * Public method that returns a cards value based on its cardIndex value.
+     * Currently only a single game type calls this method (Sabacc) but could
+     * be expanded to include other game methods easily.
+     * @param input Card Index value.
+     * @return Card value as integer.
+     */
     public static int getCardValue(int input) {
         return getSabaccValue(input);
     }
 
+    /**
+     * Private method that stores a switch statement of string literals that
+     * are used to output to console based on passed through value (usually
+     * the cardIndex value)
+     * @param input Card index value.
+     * @return Integer value on card index.
+     */
     private static String getSuitsString(int input) {
         String value;
         
@@ -102,6 +150,13 @@ public class Suit {
         return value;
     }
 
+    /**
+     * Private method that stores a switch statement of string literals that
+     * are used to output to console based on passed through value (usually
+     * the cardIndex value)
+     * @param input Card index value.
+     * @return Integer value on card index.
+     */
     private static String getSabaccString(int input) {
         
         String value;
@@ -343,6 +398,12 @@ public class Suit {
         return value;
     }
     
+    /**
+     * Private method that stores a switch statement of integer values that
+     * are used to calculate hand values.
+     * @param input Card index value.
+     * @return Integer value on card index.
+     */
     private static int getSabaccValue(int input) {
         
         int value;

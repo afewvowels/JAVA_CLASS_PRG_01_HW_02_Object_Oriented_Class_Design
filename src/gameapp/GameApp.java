@@ -7,22 +7,28 @@ package gameapp;
 
 import java.util.Scanner;
 /**
- *
+ * This application allows the user to play two card games, Suits and Sabacc
  * @author bluebackdev
  */
 public class GameApp {
-
-    /**
-     * @param args the command line arguments
-     */
     public static int selection = -1;
 
     static Scanner keyboard = new Scanner(System.in);
     
+    /**
+     * Main method, calls showMenu() method.
+     * @param args 
+     */
     public static void main(String[] args) {
         showMenu();
     }
     
+    /**
+     * Main menu method that displays game selection menu and prompts user for
+     * selection, validates selection, sets game mode, and calls appropriate
+     * game method.
+     * @param input Temp variable used to keep track of user input
+     */
     private static void showMenu() {
         String input;
         
@@ -49,6 +55,11 @@ public class GameApp {
         }
     }
     
+    /**
+     * This method implements the game logic for the Suits game type,
+     * including the menu dialogue options and data validation.
+     * @param hand Hand object that the method uses for the game
+     */
     private static void suitsGame() {
         Hand hand = new Hand();
         
@@ -79,6 +90,13 @@ public class GameApp {
         System.out.println("\nGAME OVER");
     }
     
+    /**
+     * This method implements the game logic for the Sabacc game type,
+     * including the menu dialogue options and data validation.
+     * @param round Counter that keeps track of the number of turns that the
+     * user has been through
+     * @param playerHand Hand object that the method uses for the game
+     */
     private static void sabaccGame() {
         int round = 1;
         

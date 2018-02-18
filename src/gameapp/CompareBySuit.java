@@ -8,7 +8,7 @@ package gameapp;
 import java.util.Comparator;
 
 /**
- *
+ * Class used to compare card objects to sort a hand's cards array.
  * @author bluebackdev
  */
 abstract public class CompareBySuit implements Comparator <Card> {
