@@ -14,18 +14,16 @@ import java.util.Random;
  * @author bluebackdev
  */
 public class Hand {
-    private int handValue;
+    private Random rand = new Random();
     
-    Random rand = new Random();
-    
-    Card[] cards = new Card[Suit.getCardsInHand()];
+    private Card[] cards = new Card[Suit.getCardsInHand()];
     
     public Hand() {
-        do {
+//        do {
             for (int i = 0 ; i < Suit.getCardsInHand() ; i++) {
                 this.cards[i] = new Card(rand.nextInt(Suit.getCardsInSuit()));
             }
-        } while(!validateHandSabacc());
+//        } while(!validateHandSabacc());
     }
     
     public String getCardStringAtIndex(int index) {
@@ -41,16 +39,31 @@ public class Hand {
     }
     
     public int getHandValue() {
-        handValue = 0;
+        int handValue = 0;
         
         for (Card card : this.cards) {
-            this.handValue += card.getCardValue();
+            handValue += card.getCardValue();
         }
         
         return handValue;
     }
     
-    public void replaceCard(int index) {
+    public Card[] getCardsArray() {
+        return this.cards;
+    }
+        
+    public Card[] sortHand(Card[] cardArr) {
+        Arrays.sort(cardArr, new CompareBySuit() {
+            @Override
+            public Comparator<Card> reversed() {
+                return super.reversed(); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        
+        return cardArr;
+    }
+    
+    public void replaceCardSuits(int index) {
         this.cards[index].incrementCardSuits();
     }
     
@@ -60,15 +73,45 @@ public class Hand {
         } while (!validateHandSabacc());
     }
     
-    public void sortHand() {
-        Arrays.sort(this.cards, new CompareBySuit() {
-            @Override
-            public Comparator<Card> reversed() {
-                return super.reversed(); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
+    public void addCardToHand() {
+        Card[] tempHand = new Card[this.cards.length + 1];
+        
+        for(int i = 0 ; i < cards.length ; i++) {
+            tempHand[i] = cards[i];
+        }
+        
+        cards = new Card[tempHand.length];
+        
+        for(int i = 0 ; i < cards.length ; i++) {
+            cards[i] = tempHand[i];
+        }
+        
+        do {
+            cards[cards.length - 1] = new Card(rand.nextInt(Suit.getCardsInSuit()));
+        } while (!validateHand());
     }
-    
+
+    public void removeCardFromHand(int index) {
+        Card[] tempHand = new Card[this.cards.length];
+        
+        for(int i = 0 ; i < tempHand.length ; i++) {
+            if(index != i) {
+                tempHand[i] = this.cards[i];
+            }
+            else if(index == i) {
+                tempHand[i] = new Card(-1);
+            }
+        }
+        
+        sortHand(tempHand);
+        
+        cards = new Card[this.cards.length - 1];
+        
+        for(int i = 0 ; i < this.cards.length ; i++) {
+            cards[i] = tempHand[i];
+        }
+    }
+
     public void randomizeHandSuits() {
         for (int i = 0 ; i < Suit.getCardsInHand() ; i++) {
             if (this.rand.nextInt(5) == 0) {
@@ -103,8 +146,7 @@ public class Hand {
                 isGameOver = validateHandSuits();
                 break;
             case SABACC:
-//                isGameOver = validateHandSabacc();
-                isGameOver = false;
+                isGameOver = validateHandSabacc();
                 break;
             default:
                 isGameOver = true;

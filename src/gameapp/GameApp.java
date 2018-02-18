@@ -20,6 +20,10 @@ public class GameApp {
     static Scanner keyboard = new Scanner(System.in);
     
     public static void main(String[] args) {
+        showMenu();
+    }
+    
+    private static void showMenu() {
         String input;
         
         System.out.println("Please choose your gametype:");
@@ -57,10 +61,13 @@ public class GameApp {
             for (int i = 0 ; i < Suit.getCardsInHand() ; i++) {
                 System.out.print(hand.getCardStringAtIndex(i) + "\t");
             }
-            System.out.print("\nSelect a card to discard (1-3): ");
-            selection = keyboard.nextInt();
             
-            hand.replaceCard(selection - 1);
+            do {
+                System.out.print("\nSelect a card to discard (1-3): ");
+                selection = keyboard.nextInt();
+            } while (selection < 1 || selection > 3);
+            
+            hand.replaceCardSuits(selection - 1);
             hand.randomizeHandSuits();
             
         } while (!hand.validateHand());
@@ -73,40 +80,67 @@ public class GameApp {
     }
     
     private static void sabaccGame() {
-        int handValue;
         int round = 1;
         
         Hand playerHand = new Hand();
-        Hand dealerHand = new Hand();
+//        Hand dealerHand = new Hand();
 
-        do {
-            handValue = 0;
-            
-            System.out.println("This is your hand:");
-            for (int i = 0 ; i < playerHand.getHandSize() ; i++) {
-                System.out.print(playerHand.getCardStringAtIndex(i) + "\t");
+        do {            
+            while (!playerHand.validateHand()) {
+                playerHand = new Hand();
             }
+//            System.out.println("This is your hand:");
+//            for (int i = 0 ; i < playerHand.getHandSize() ; i++) {
+//                System.out.print(playerHand.getCardStringAtIndex(i) + "\t");
+//            }
             
             System.out.println("\nThis is your sorted hand:");
-            playerHand.sortHand();
+            playerHand.sortHand(playerHand.getCardsArray());
             for (int i = 0 ; i < playerHand.getHandSize() ; i++) {
                 System.out.print(playerHand.getCardStringAtIndex(i) + "\t");
             }
             
-            System.out.print("\nThis is the value of your hand: ");
+            System.out.print("\nThis is the value of your hand:\n");
             for (int i = 0 ; i < playerHand.getHandSize() ; i++) {
                 System.out.print(playerHand.getCardValueAtIndex(i));
-                if (i != Suit.getCardsInHand() - 1) {
+                if (i != playerHand.getHandSize() - 1) {
                     System.out.print(" + ");
                 }
             }
             System.out.print(" = " + playerHand.getHandValue());
             
-            System.out.print("\nSelect a card to discard (1-"
-                    + playerHand.getHandSize() + "): ");
+            System.out.println("\nSelect an action:");
+            System.out.println("\t1.Draw a Card");
+            System.out.println("\t2.Swap a Card");
+            System.out.println("\t3.Discard a Card");
+            System.out.println("\t4.Take no Action");
+            System.out.print("Selection: ");
             selection = keyboard.nextInt();
+            
+            switch(selection) {
+                case 1:
+                    playerHand.addCardToHand();
+                    break;
+                case 2:
+                    System.out.print("\nSelect a card to swap (1-"
+                            + playerHand.getHandSize() + "): ");
+                    selection = keyboard.nextInt();
+                    playerHand.replaceCardSabacc(selection - 1);
+                    break;
+                case 3:
+                    System.out.print("\nSelect a card to Discard (1-"
+                            + playerHand.getHandSize() + "): ");
+                    selection = keyboard.nextInt();
+                    playerHand.removeCardFromHand(selection - 1);
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("ERROR");
+                    break;
+            }
 
-            playerHand.replaceCardSabacc(selection - 1);
+            System.out.println("\nHand is randomizing");
             playerHand.randomizeHandSabacc();
 
             round++;
@@ -114,14 +148,13 @@ public class GameApp {
 
         if (playerHand.getHandValue() >= -23 && playerHand.getHandValue() <= 23) {
             System.out.println("\nWinning hand:");
-            for (int i = 0 ; i < Suit.getCardsInHand() ; i++) {
+            for (int i = 0 ; i < playerHand.getHandSize() ; i++) {
                 System.out.print(playerHand.getCardStringAtIndex(i) + "\t");
             }
-                        
-            System.out.print("\nThis is the value of your hand: ");
+            System.out.print("\nThis is the value of your hand:\n");
             for (int i = 0 ; i < playerHand.getHandSize() ; i++) {
                 System.out.print(playerHand.getCardValueAtIndex(i));
-                if (i != Suit.getCardsInHand() - 1) {
+                if (i != playerHand.getHandSize() - 1) {
                     System.out.print(" + ");
                 }
             }

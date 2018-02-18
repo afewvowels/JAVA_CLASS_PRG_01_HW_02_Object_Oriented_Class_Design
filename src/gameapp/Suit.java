@@ -577,7 +577,7 @@ public class Suit {
                 value = 0;
                 break;
             default:
-                value = -113;
+                value = 113;
                 break;
         }
         
