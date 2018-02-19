@@ -39,7 +39,7 @@ public class Card {
      * @return A string representation of the card value based on Card's index
      */
     public String getCardString() {
-        return Suit.getCardString(cardIndex);
+        return Suit.getCardString(this.cardIndex);
     }
     
     /**
@@ -48,7 +48,7 @@ public class Card {
      * index value.
      */
     public int getCardValue() {
-        return Suit.getCardValue(cardIndex);
+        return Suit.getCardValue(this.cardIndex);
     }
     
     /**
@@ -63,10 +63,10 @@ public class Card {
      * Increments the card's index value, used for Suits game card changes.
      */
     public void incrementCardSuits() {
-        cardIndex++;
+        this.cardIndex++;
         
-        if(cardIndex == Suit.getCardsInSuit()) {
-            cardIndex = 0;
+        if(this.cardIndex == Suit.getCardsInSuit()) {
+            this.cardIndex = 0;
         }
     }
 }
