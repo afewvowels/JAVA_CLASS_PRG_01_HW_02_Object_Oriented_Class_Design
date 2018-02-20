@@ -26,6 +26,9 @@ public class Suit {
     private static int cardsInSuit;
     private static int cardsInHand;
     
+    private static final int PROBABILITY_SUITS = 5;
+    private static final int PROBABILITY_SABACC = 5;
+    
     // Useful for changing symbols associated with Sabacc suits.
     // Better than hardcoding in switch statements.
     private static String suitCoins = "\u2446";
@@ -117,6 +120,17 @@ public class Suit {
      */
     public static int getCardValue(int input) {
         return getSabaccValue(input);
+    }
+    
+    public static int getRandomCardChangeProbability() {
+        switch (gameType) {
+            case SUITS:
+                return PROBABILITY_SUITS;
+            case SABACC:
+                return PROBABILITY_SABACC;
+            default:
+                return -1;
+        }
     }
 
     /**

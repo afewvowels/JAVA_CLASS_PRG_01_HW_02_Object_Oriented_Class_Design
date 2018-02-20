@@ -6,6 +6,8 @@
 package gameapp;
 
 import java.util.Scanner;
+import java.lang.Math;
+import static java.lang.Math.abs;
 /**
  * This application allows the user to play two card games, Suits and Sabacc
  * @author bluebackdev
@@ -142,7 +144,7 @@ public class GameApp {
         Hand playerHand = new Hand();
 //        FUTURE USE: Want to create dealer/house hand for
 //        player to play against
-//        Hand dealerHand = new Hand();
+        Hand dealerHand = new Hand();
 
         // Main game logic loop, runs while rounds < NUM_ROUNDS
         do {            
@@ -151,11 +153,32 @@ public class GameApp {
             while (!playerHand.validateHand()) {
                 playerHand = new Hand();
             }
+            
+//            while (!dealerHand.validateHand()) {
+//                dealerHand = new Hand();
+//            }
 //            DEBUG: Original unsorted hand available for display
 //            System.out.println("This is your hand:");
 //            for (int i = 0 ; i < playerHand.getHandSize() ; i++) {
 //                System.out.print(playerHand.getCardStringAtIndex(i) + "\t");
 //            }
+
+////          Print out the sorted hand for the player to view
+//            System.out.println("\nThis is the dealer's hand:");
+//            playerHand.sortHand(dealerHand.getCardsArray());
+//            for (int i = 0 ; i < dealerHand.getHandSize() ; i++) {
+//                System.out.print(dealerHand.getCardStringAtIndex(i) + "\t");
+//            }
+//            
+////          Print out the hands total score for the player to view
+//            System.out.print("\nThis is the value of the dealer's hand:\n");
+//            for (int i = 0 ; i < dealerHand.getHandSize() ; i++) {
+//                System.out.print(dealerHand.getCardValueAtIndex(i));
+//                if (i != dealerHand.getHandSize() - 1) {
+//                    System.out.print(" + ");
+//                }
+//            }
+//            System.out.print(" = " + dealerHand.getHandValue());
             
 //          Print out the sorted hand for the player to view
             System.out.println("\nThis is your sorted hand:");
@@ -211,6 +234,17 @@ public class GameApp {
                     System.out.println("ERROR");
                     break;
             }
+            
+//            if(dealerHand.getHandValue() < -23 || dealerHand.getHandValue() > 23) {
+//                dealerHand.removeCardFromHand(dealerHand.getHandSize() - 1);
+//            }
+//            else if((dealerHand.getHandValue() < 23 && dealerHand.getHandValue() > 15) ||
+//                    (dealerHand.getHandValue() > -23 && dealerHand.getHandValue() < -15)) {
+//                
+//            }
+//            else if(dealerHand.getHandValue() <= -15 || dealerHand.getHandValue() <= 15) {
+//                dealerHand.addCardToHand();
+//            }
 
 //          Randomization of hand occurs here once all actions have been taken
             System.out.println("\nHand is randomizing");
@@ -239,6 +273,14 @@ public class GameApp {
             }
             System.out.print(" = " + playerHand.getHandValue());
         }
+//        if(abs(playerHand.getHandValue()) > abs(dealerHand.getHandValue()) &&
+//                abs(playerHand.getHandValue()) <= 23) {
+//            System.out.println("\nYou won!");
+//        }
+//        else if(abs(playerHand.getHandValue()) <= abs(dealerHand.getHandValue())
+//                && abs(dealerHand.getHandValue()) <= 23) {
+//            System.out.println("\nThe house wins!");
+//        }
         else {
             System.out.println("\nYou bombed out!");
         }

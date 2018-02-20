@@ -191,7 +191,7 @@ public class Hand {
      */
     public void randomizeHandSuits() {
         for (int i = 0 ; i < Suit.getCardsInHand() ; i++) {
-            if (this.rand.nextInt(5) == 0) {
+            if (this.rand.nextInt(Suit.getRandomCardChangeProbability()) == 0) {
                 this.cards[i].incrementCardSuits();
             }
         }
@@ -215,7 +215,7 @@ public class Hand {
 //            }
 //            
             do { 
-                if (this.rand.nextInt(5) == 0) {
+                if (this.rand.nextInt(Suit.getRandomCardChangeProbability()) == 0) {
                     this.cards[i].setCardIndex(this.rand.nextInt(Suit.getCardsInSuit()));
                 }
             } while (!validateHandSabacc());
